@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="2px" style="border: red">
+    <tr>
+        <th style="font-style: italic">policyid</th>
+        <th style="font-style: italic">holdername</th>
+        <th style="font-style: italic">address 1</th>
+        <th style="font-style: italic">address 2</th>
+        <th style="font-style: italic">state</th>
+        <th style="font-style: italic">coverage</th>
+        <th>rate details</th>
+    </tr>
+    <tr th:each="l : ${details}">
+        <td th:text="${l.policynumber}" style="text-align: center"></td>
+        <td th:text="${l.holdername}" style="text-align: center"></td>
+        <td th:text="${l.address1}" style="text-align: center"></td>
+        <td th:text="${l.address2}" style="text-align: center"></td>
+        <td>
+            <ul>
+                <li th:each="c : ${l.policyHolderLocations}" th:text="${c.state}" ></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="cover : ${l.coverageDetails}" th:text="${cover.coveragename}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="amount : ${l.coverageRates}" th:text="${amount.rate}"></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

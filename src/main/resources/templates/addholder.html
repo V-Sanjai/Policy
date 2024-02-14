@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/policy/submit" th:object="${details}" method="post">
+    <label for="policynumber">Policy Number:</label>
+    <input type="number" id="policynumber" name="policynumber" required th:field="*{policynumber}">
+
+    <label for="holdername">Holder Name:</label>
+    <input type="text" id="holdername" name="holdername" required th:field="*{holdername}">
+
+    <label for="address1">Address 1:</label>
+    <input type="text" id="address1" name="address1" required th:field="*{address1}">
+
+    <label for="address2">Address 2:</label>
+    <input type="text" id="address2" name="address2" required th:field="*{address2}"><br>
+
+    <label style="color: red">Locations</label>
+    <div th:each="l : ${locations}">
+        <input type="checkbox" th:id="${l.id}" th:name="locations" th:value="${l.id}">
+        <label th:for="${l.id}" th:text="${l.state}"></label>
+    </div>
+
+    <label style="color: red">Coverages</label>
+    <div th:each="c : ${coverages}">
+        <input type="checkbox" th:id="${c.id}" th:name="coverages" th:value="${c.id}">
+        <label th:for="${c.id}" th:text="${c.coveragename}"></label>
+    </div>
+
+    <label style="color: red">Rates</label>
+    <div th:each="r : ${amounts}">
+        <input type="checkbox" th:id="${r.id}" th:name="amounts" th:value="${r.id}">
+        <label th:for="${r.id}">
+            <span th:text="${r.rate}"></span>
+            <span th:text="${r.coverage}"></span>
+            <span th:text="${r.state}"></span>
+        </label>
+    </div>
+
+    <input type="submit" value="Add" style="color: darkgreen">
+</form>
+</body>
+</html>
